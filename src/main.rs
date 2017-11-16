@@ -1,7 +1,7 @@
-use std::net::{TcpListener, TcpStream};
-use std::io::Write;
+//use std::net::{TcpListener, TcpStream};
+//use std::io::Write;
 
-fn main() {
+/*fn main() {
     let listener = TcpListener::bind("127.0.0.1:32989").unwrap();
     for result in listener.incoming() {
 //        handle_client(stream?);
@@ -18,4 +18,16 @@ fn main() {
 
 //        let _ = stream?.write(&[1]);
     }
+}*/
+
+#[link(name = "mdbx", kind = "static")]
+extern {
+    fn mdbx_test() -> ();
+}
+
+fn main() {
+    unsafe {
+        mdbx_test();
+    }
+
 }
