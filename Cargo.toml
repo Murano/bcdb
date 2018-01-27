@@ -17,3 +17,4 @@ libc = "0.2.33"
 
 [build-dependencies]
 bindgen = "0.26.3"
+gcc = "0.3.54"

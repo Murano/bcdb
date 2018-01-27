@@ -2,7 +2,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
-use libc::{iovec, c_void, int32_t, uint32_t};
+use libc::{iovec, c_void, int32_t, uint32_t, c_uchar};
 
 pub const MDBX_MAXDATASIZE: uint32_t = 2147483647;
 pub const MDBX_NOSUBDIR: uint32_t = 16384;
@@ -95,15 +95,15 @@ extern "C" {
 }
 
 extern "C" {
-    pub fn mdbx_strerror(errnum: ::std::os::raw::c_uint)
-                         -> *const ::std::os::raw::c_char;
+    pub fn mdbx_strerror(errnum: uint32_t) -> *const c_uchar;
 }
 
 extern "C" {
-    pub fn mdbx_env_open(env: *mut MDBX_env,
-                         path: *const ::std::os::raw::c_char,
-                         flags: ::std::os::raw::c_uint, mode: u32)
-                         -> ::std::os::raw::c_uint;
+    pub fn mdbx_env_open(
+        env: *mut MDBX_env,
+        path: *const c_uchar,
+        flags: uint32_t,
+        mode: uint32_t) -> uint32_t;
 }
 
 extern "C" {
@@ -111,35 +111,47 @@ extern "C" {
 }
 
 extern "C" {
-    pub fn mdbx_txn_begin(env: *mut MDBX_env, parent: *mut MDBX_txn,
-                          flags: ::std::os::raw::c_uint,
-                          txn: *mut *mut MDBX_txn) -> ::std::os::raw::c_uint;
+    pub fn mdbx_txn_begin(
+        env: *mut MDBX_env,
+        parent: *mut MDBX_txn,
+        flags: uint32_t,
+        txn: *mut *mut MDBX_txn) -> uint32_t;
 }
 
 extern "C" {
-    pub fn mdbx_dbi_open(txn: *mut MDBX_txn,
-                         name: *const ::std::os::raw::c_char,
-                         flags: ::std::os::raw::c_uint, dbi: *mut MDBX_dbi)
-                         -> ::std::os::raw::c_int;
+    pub fn mdbx_dbi_open(
+        txn: *mut MDBX_txn,
+        name: *const c_uchar,
+        flags: uint32_t,
+        dbi: *mut MDBX_dbi) -> int32_t;
 }
 
 extern "C" {
-    pub fn mdbx_txn_commit(txn: *mut MDBX_txn) -> ::std::os::raw::c_uint;
+    pub fn mdbx_txn_commit(txn: *mut MDBX_txn) -> uint32_t;
 }
 
 extern "C" {
-    pub fn mdbx_put(txn: *mut MDBX_txn, dbi: MDBX_dbi, key: *const MDBX_val,
-                    data: *const MDBX_val, flags: ::std::os::raw::c_uint)
-                    -> ::std::os::raw::c_int;
+    pub fn mdbx_put(
+        txn: *mut MDBX_txn,
+        dbi: MDBX_dbi,
+        key: *const MDBX_val,
+        data: *const MDBX_val,
+        flags: uint32_t) -> int32_t;
 }
 
 extern "C" {
-    pub fn mdbx_get(txn: *mut MDBX_txn, dbi: MDBX_dbi, key: *mut MDBX_val,
-                    data: *mut MDBX_val) -> ::std::os::raw::c_int;
+    pub fn mdbx_get(
+        txn: *mut MDBX_txn,
+        dbi: MDBX_dbi,
+        key: *mut MDBX_val,
+        data: *mut MDBX_val) -> int32_t;
 }
 
+//FOR FFI TESTS
 extern "C" {
-    pub fn show_values(key: *const MDBX_val, data: *const MDBX_val,
-                       scalar: ::std::os::raw::c_int,
-                       str: *mut ::std::os::raw::c_char);
+    pub fn show_values(
+        key: *const MDBX_val,
+        data: *const MDBX_val,
+        scalar: int32_t,
+        str: *mut c_uchar) -> ();
 }
