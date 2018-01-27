@@ -35,6 +35,7 @@ name = "bcdb"
 version = "0.1.0"
 dependencies = [
  "bindgen 0.26.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libc 0.2.33 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]

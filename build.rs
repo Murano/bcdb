@@ -4,9 +4,9 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    println!(r"cargo:rustc-link-search=/home/timur/sources/libmdbx");
+    println!(r"cargo:rustc-link-search=/home/tim/source/libmdbx");
 
-    let bindings = bindgen::Builder::default()
+    /*let bindings = bindgen::Builder::default()
         // The input header we would like to generate
         // bindings for.
         .header("mdbx.h")
@@ -19,5 +19,5 @@ fn main() {
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings
         .write_to_file(out_path.join("bindings.rs"))
-        .expect("Couldn't write bindings!");
+        .expect("Couldn't write bindings!");*/
 }
