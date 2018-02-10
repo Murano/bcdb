@@ -2,6 +2,8 @@ extern crate libc;
 mod ffi;
 
 use std::ffi::{CString};
+use libc::c_void;
+use ffi::{MDBX_val};
 
 struct Data {
     key: MDBX_val, //TODO ??
@@ -37,12 +39,12 @@ impl Data {
         let mut mutable_key = key;
         let base_key = &mut mutable_key as *mut _ as *mut c_void;
 
-        let data_key: MDBX_val = iovec {
+        let data_key: MDBX_val = MDBX_val {
             iov_len: std::mem::size_of_val(&mutable_key),
             iov_base: base_key
         };
 
-        let mut data_value: MDBX_val = iovec {
+        let mut data_value: MDBX_val = MDBX_val {
             iov_len: 0,
             iov_base: std::ptr::null_mut()
         };
@@ -125,19 +127,22 @@ impl MDBX {
 }
 
 
-struct Session {
-    mdbx: MDBX
+//struct Session {
+//    mdbx: MDBX
+//}
+//
+//impl Session {
+//    fn new() -> Session {
+//
+//    }
+//
+//    fn get() -> () {
+//
+//    }
+//
+//
+//}
+
+pub fn debug() ->(){
+    unsafe{ffi::print_d()};
 }
-
-impl Session {
-    fn new() -> Session {
-
-    }
-
-    fn get() -> () {
-
-    }
-
-
-}
-

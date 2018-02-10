@@ -2,7 +2,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
-use libc::{iovec, c_void, int32_t, uint32_t, c_uchar};
+use libc::{iovec, c_void, int32_t, uint32_t, c_uchar, c_schar};
 
 pub const MDBX_MAXDATASIZE: uint32_t = 2147483647;
 pub const MDBX_NOSUBDIR: uint32_t = 16384;
@@ -89,7 +89,7 @@ pub struct MDBX_txn {}
 pub struct MDBX_cursor {}
 
 
-#[link(name = "mdbx", kind = "static")]
+////////////////#[link(name = "mdbx", kind = "static")] //TODO вынести в Cargo.toml -> links = "mdbx"
 extern "C" {
     pub fn mdbx_env_create(penv: *mut *mut MDBX_env) -> ::std::os::raw::c_uint;
 }
@@ -101,7 +101,7 @@ extern "C" {
 extern "C" {
     pub fn mdbx_env_open(
         env: *mut MDBX_env,
-        path: *const c_uchar,
+        path: *const c_schar,
         flags: uint32_t,
         mode: uint32_t) -> uint32_t;
 }
@@ -121,7 +121,7 @@ extern "C" {
 extern "C" {
     pub fn mdbx_dbi_open(
         txn: *mut MDBX_txn,
-        name: *const c_uchar,
+        name: *const c_schar,
         flags: uint32_t,
         dbi: *mut MDBX_dbi) -> int32_t;
 }
@@ -148,10 +148,13 @@ extern "C" {
 }
 
 //FOR FFI TESTS
+//extern "C" {
+//    pub fn show_values(
+//        key: *const MDBX_val,
+//        data: *const MDBX_val,
+//        scalar: int32_t,
+//        str: *mut c_uchar) -> ();
+//}
 extern "C" {
-    pub fn show_values(
-        key: *const MDBX_val,
-        data: *const MDBX_val,
-        scalar: int32_t,
-        str: *mut c_uchar) -> ();
+    pub fn print_d() -> ();
 }

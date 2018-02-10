@@ -17,4 +17,5 @@ libc = "0.2.33"
 
 [build-dependencies]
 bindgen = "0.26.3"
-gcc = "0.3.54"
+pkg-config = "0.3"
+cmake = "0.1.29"

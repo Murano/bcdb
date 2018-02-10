@@ -41,7 +41,7 @@ impl Drop for MDBX_env {
 
 
 fn main() {
-
+    mdbx::debug();
    /* let mut mdbx = MDBX::new();
     mdbx.create();
     mdbx.open("./db16", MDBX_NOSUBDIR | MDBX_COALESCE | MDBX_LIFORECLAIM, 0o664);
@@ -52,34 +52,34 @@ fn main() {
         panic!("Exited with code; {}", open_result)
     }
 */
-    let data = Data::new(54, 245668);
-
-    unsafe {
-        let s = CString::new("885558").unwrap().into_raw();
-        let a = 5;
-//        show_values(&data.key, &data.value, 2, s);
-
-        let mut mutable_key = 5;
-
-        let a = MDBX_val {
-            iov_len: std::mem::size_of_val(&mutable_key),
-            iov_base: &mut mutable_key as *mut _ as *mut c_void
-        };
-
-        let s2 = CString::new("22**28+8").unwrap();
-        let mut s3 = s2.into_raw();
-        let mut s4 = s3 as *mut _ as *mut c_void;
-//        let mut s5 = s4 as *mut c_void;
-
-        let st = MDBX_val {
-            iov_len: std::mem::size_of_val(&s4),
-            iov_base: s4
-        };
-
-        show_values(&a, &st, 2, s);
-
-        let b = 5;
-    }
+//    let data = Data::new(54, 245668);
+//
+//    unsafe {
+//        let s = CString::new("885558").unwrap().into_raw();
+//        let a = 5;
+////        show_values(&data.key, &data.value, 2, s);
+//
+//        let mut mutable_key = 5;
+//
+//        let a = MDBX_val {
+//            iov_len: std::mem::size_of_val(&mutable_key),
+//            iov_base: &mut mutable_key as *mut _ as *mut c_void
+//        };
+//
+//        let s2 = CString::new("22**28+8").unwrap();
+//        let mut s3 = s2.into_raw();
+//        let mut s4 = s3 as *mut _ as *mut c_void;
+////        let mut s5 = s4 as *mut c_void;
+//
+//        let st = MDBX_val {
+//            iov_len: std::mem::size_of_val(&s4),
+//            iov_base: s4
+//        };
+//
+//        show_values(&a, &st, 2, s);
+//
+//        let b = 5;
+//    }
 
     /*let put_result = mdbx.put(&data, 0);
 
