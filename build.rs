@@ -2,6 +2,7 @@ extern crate cmake;
 
 fn main() {
 
+   //TODO temporary comment
    /* let dst = cmake::build("libmdbx");
 
     println!("cargo:rustc-link-search=native={}/lib64", dst.display());
