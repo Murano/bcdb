@@ -2,10 +2,10 @@ extern crate cmake;
 
 fn main() {
 
-    let dst = cmake::build("libmdbx");
+   /* let dst = cmake::build("libmdbx");
 
     println!("cargo:rustc-link-search=native={}/lib64", dst.display());
-    println!("cargo:rustc-link-lib=static=mdbx");
+    println!("cargo:rustc-link-lib=static=mdbx");*/
 
     /*let bindings = bindgen::Builder::default()
         // The input header we would like to generate

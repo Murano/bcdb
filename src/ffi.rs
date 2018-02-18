@@ -2,7 +2,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
-use libc::{iovec, c_void, int32_t, uint32_t, c_uchar, c_schar};
+use libc::{iovec, /*c_void, */int32_t, uint32_t, c_uchar, c_schar};
 
 pub const MDBX_MAXDATASIZE: uint32_t = 2147483647;
 pub const MDBX_NOSUBDIR: uint32_t = 16384;
@@ -84,12 +84,13 @@ pub type MDBX_dbi = u32;
 
 pub type MDBX_val = iovec;
 
+#[repr(C)]
 pub struct MDBX_txn {}
 
+#[repr(C)]
 pub struct MDBX_cursor {}
 
 
-////////////////#[link(name = "mdbx", kind = "static")] //TODO вынести в Cargo.toml -> links = "mdbx"
 extern "C" {
     pub fn mdbx_env_create(penv: *mut *mut MDBX_env) -> ::std::os::raw::c_uint;
 }
