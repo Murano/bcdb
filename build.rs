@@ -1,17 +1,21 @@
 extern crate cmake;
+//extern crate bindgen;
+
+//use std::env;
+//use std::path::PathBuf;
 
 fn main() {
 
    //TODO temporary comment
-   /* let dst = cmake::build("libmdbx");
+    let dst = cmake::build("libmdbx");
 
     println!("cargo:rustc-link-search=native={}/lib64", dst.display());
-    println!("cargo:rustc-link-lib=static=mdbx");*/
+    println!("cargo:rustc-link-lib=static=mdbx");
 
     /*let bindings = bindgen::Builder::default()
         // The input header we would like to generate
         // bindings for.
-        .header("mdbx.h")
+        .header("libmdbx/mdbx.h")
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.

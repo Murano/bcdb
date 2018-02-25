@@ -13,7 +13,7 @@ struct MDBX {
     mdbx_txn: *mut ffi::MDBX_txn
 }
 
-
+//TODO Error handling with result
 impl MDBX {
     fn new() -> MDBX {
         MDBX{
@@ -23,7 +23,7 @@ impl MDBX {
         }
     }
 
-    fn create(&mut self) -> u32 {
+    fn create(&mut self) -> i32 {
         unsafe {
             ffi::mdbx_env_create(&mut self.mdbx_env)
         }
@@ -33,6 +33,12 @@ impl MDBX {
         let cPath = CString::new(path).unwrap();
         unsafe {
             ffi::mdbx_env_open(self.mdbx_env, cPath.as_ptr(), flags, mode)
+        }
+    }
+
+    fn close(&mut self) -> i32 {
+        unsafe {
+            ffi::mdbx_dbi_close(self.mdbx_env, *self.mdbx_dbi);
         }
     }
 
@@ -141,11 +147,11 @@ impl Session {
 
 
         //TODO error handling
-        self.mdbx.txn_begin(0); //TODO flags
-        self.mdbx.dbi_open("", 0); //TODO flags
-        self.mdbx.put(&key, &value, 0); //TODO flags
-        self.mdbx.txn_commit();
-        self.mdbx.dbi_close(); //TODO implement
+//        self.mdbx.txn_begin(0); //TODO flags
+//        self.mdbx.dbi_open("", 0); //TODO flags
+//        self.mdbx.put(&key, &value, 0); //TODO flags
+//        self.mdbx.txn_commit();
+//        self.mdbx.dbi_close(); //TODO implement
     }
 
 

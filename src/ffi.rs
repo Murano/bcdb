@@ -92,7 +92,7 @@ pub struct MDBX_cursor {}
 
 
 extern "C" {
-    pub fn mdbx_env_create(penv: *mut *mut MDBX_env) -> ::std::os::raw::c_uint;
+    pub fn mdbx_env_create(penv: *mut *mut MDBX_env) -> uint32_t;
 }
 
 extern "C" {
@@ -146,6 +146,12 @@ extern "C" {
         dbi: MDBX_dbi,
         key: *mut MDBX_val,
         data: *mut MDBX_val) -> int32_t;
+}
+
+extern "C" {
+    pub fn mdbx_dbi_close(
+        env: *mut MDBX_env,
+        dbi: MDBX_dbi) -> int32_t;
 }
 
 //FOR FFI TESTS
